@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="redirect.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charity Billionaire — Transparency</title>
+  <meta name="description" content="Every contract, address, and rule behind Charity Billionaire — published on-chain and verifiable by anyone." />
+  <link rel="icon" href="assets/monogram.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .tp { max-width: 980px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+    .tp-hero { text-align: center; padding: clamp(72px, 12vh, 140px) 0 clamp(28px, 5vh, 56px); }
+    .tp-lede { max-width: 56ch; margin: 18px auto 0; color: var(--muted, #b9b2a3); line-height: 1.7; }
+    .tp-section { padding: clamp(28px, 5vh, 52px) 0; border-top: 1px solid rgba(184,146,58,0.16); }
+    .tp-section h2 { margin: 0 0 6px; }
+    .tp-section .eyebrow { margin-bottom: 16px; }
+    .tp-live { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(184,146,58,0.16); border: 1px solid rgba(184,146,58,0.16); border-radius: 4px; overflow: hidden; }
+    .tp-live .cell { background: #0e0c0a; padding: 26px 22px; text-align: center; }
+    .tp-live .label { display: block; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8a8275; margin-bottom: 10px; }
+    .tp-live .figure { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 42px); color: #e9dcc0; }
+    .reg { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .reg th, .reg td { text-align: left; padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+    .reg th { font-family: "Jost", sans-serif; font-weight: 500; letter-spacing: .04em; color: #cabf9f; }
+    .reg td.role { color: #b9b2a3; white-space: nowrap; }
+    .reg a.addr { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: #d8c79a; text-decoration: none; border-bottom: 1px dotted rgba(216,199,154,0.4); word-break: break-all; }
+    .reg a.addr:hover { color: #f0e3bd; }
+    .reg .note { color: #7e776a; font-size: 12px; display: block; margin-top: 3px; }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .fact { background: #0e0c0a; border: 1px solid rgba(184,146,58,0.16); border-radius: 4px; padding: 22px; }
+    .fact h3 { margin: 0 0 8px; font-family: "Jost", sans-serif; font-weight: 500; font-size: 14px; letter-spacing: .04em; color: #e9dcc0; }
+    .fact p { margin: 0; color: #b0a896; font-size: 13.5px; line-height: 1.6; }
+    .fact .big { font-family: "Cormorant Garamond", serif; font-size: 30px; color: #e9dcc0; }
+    .links-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+    .links-row a { font-size: 13px; }
+    @media (max-width: 640px) { .tp-live { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="wordmark" href="index.html">
+      <img src="assets/monogram.svg" alt="" class="monogram" />
+      <span>Charity&nbsp;Billionaire</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#charity">Charity</a>
+      <a href="transparency.html" aria-current="page">Transparency</a>
+    </nav>
+    <a class="btn btn-ghost" href="index.html">Home</a>
+  </header>
+
+  <main class="tp">
+    <section class="tp-hero">
+      <p class="eyebrow center reveal" style="--d:0ms">Proof, not promises</p>
+      <h1 class="display small reveal" style="--d:80ms">Everything here is on-chain.</h1>
+      <p class="tp-lede reveal" style="--d:160ms">
+        There is no private database and no hidden ledger. Every deposit, withdrawal, drawing,
+        winner, and charitable gift is a public record on Base. The contract's source is verified —
+        anyone can read exactly what the code does, and confirm it can never reach your principal.
+      </p>
+    </section>
+
+    <!-- Live state -->
+    <section class="tp-section">
+      <p class="eyebrow center">Live On-Chain State</p>
+      <h2 class="display center small">Read straight from the vault.</h2>
+      <div class="tp-live" style="margin-top: 22px;">
+        <div class="cell">
+          <span class="label">Total Pooled</span>
+          <span class="figure" id="poolValue" data-stat>$0</span>
+        </div>
+        <div class="cell">
+          <span class="label">Active Depositors</span>
+          <span class="figure" id="walletsValue" data-stat>0</span>
+        </div>
+        <div class="cell">
+          <span class="label">This Week's Charity</span>
+          <span class="figure" id="charityName">To be announced</span>
+        </div>
+      </div>
+      <p class="reg" style="text-align:center; color:#7e776a; font-size:12px; margin-top:14px;">
+        Network: Base mainnet · Figures update every 30 seconds from the contract.
+      </p>
+    </section>
+
+    <!-- Contract registry -->
+    <section class="tp-section">
+      <p class="eyebrow center">The Contracts</p>
+      <h2 class="display center small">Addresses, verified and public.</h2>
+      <table class="reg" style="margin-top: 18px;">
+        <thead>
+          <tr><th>Component</th><th>Address (Base mainnet)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="role">Prize Vault<span class="note">Holds deposits, runs the draw</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0x3993bD557E0d4a1E5A8Ec09a005E7Eee3E032f70#code" target="_blank" rel="noopener">0x3993bD557E0d4a1E5A8Ec09a005E7Eee3E032f70</a><span class="note">Source verified ✓</span></td>
+          </tr>
+          <tr>
+            <td class="role">Randomness Adapter<span class="note">Chainlink VRF v2.5</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0x604585F750cDCc503ABb65eBcD5b656FBEe6925c#code" target="_blank" rel="noopener">0x604585F750cDCc503ABb65eBcD5b656FBEe6925c</a><span class="note">Source verified ✓</span></td>
+          </tr>
+          <tr>
+            <td class="role">VRF Owner-Lock<span class="note">Makes the coordinator unchangeable</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0xcA5002B3C7c5F92Ddb3c0C4D2fefEdD57F9A3418#code" target="_blank" rel="noopener">0xcA5002B3C7c5F92Ddb3c0C4D2fefEdD57F9A3418</a><span class="note">Source verified ✓</span></td>
+          </tr>
+          <tr>
+            <td class="role">Automation Target<span class="note">Fires the weekly draw</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0x889D7edcbc84bFff3DB08FB5AD1638Ba8BF781BB#code" target="_blank" rel="noopener">0x889D7edcbc84bFff3DB08FB5AD1638Ba8BF781BB</a><span class="note">Source verified ✓</span></td>
+          </tr>
+          <tr>
+            <td class="role">Asset — USDC<span class="note">The deposited stablecoin</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" target="_blank" rel="noopener">0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</a></td>
+          </tr>
+          <tr>
+            <td class="role">Yield Source — Aave v3 Pool<span class="note">Where deposits earn interest</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0xA238Dd80C259a72e81d7e4664a9801593F98d1c5" target="_blank" rel="noopener">0xA238Dd80C259a72e81d7e4664a9801593F98d1c5</a></td>
+          </tr>
+          <tr>
+            <td class="role">Interest Receipt — aUSDC<span class="note">Tracks accrued yield</span></td>
+            <td><a class="addr" href="https://basescan.org/address/0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB" target="_blank" rel="noopener">0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- The rules -->
+    <section class="tp-section">
+      <p class="eyebrow center">The Rules, In Code</p>
+      <h2 class="display center small">Fixed, automated, no discretion.</h2>
+      <div class="facts" style="margin-top: 22px;">
+        <div class="fact">
+          <h3>The split</h3>
+          <p><span class="big">90 / 5 / 5</span><br>Of the interest only: 90% to one winner, 5% to charity, 5% to the platform. Principal is never part of the split. The charity gift is delivered on-chain through <a href="https://endaoment.org" target="_blank" rel="noopener">Endaoment</a>, a 501(c)(3) donor-advised fund, which grants it to the week's named charity.</p>
+        </div>
+        <div class="fact">
+          <h3>The cadence</h3>
+          <p><span class="big">Weekly</span><br>One drawing every 7 days. The schedule is enforced by the contract itself — starting a due draw is permissionless (our open-source trigger does it automatically, and anyone can), so no human chooses the timing or the winner.</p>
+        </div>
+        <div class="fact">
+          <h3>The odds</h3>
+          <p>Equal per dollar. Every $1 deposited is one equal, verifiable chance. Splitting funds across wallets gives no advantage.</p>
+        </div>
+        <div class="fact">
+          <h3>The randomness</h3>
+          <p>Chainlink VRF v2.5 — cryptographically provable on-chain randomness. The operator cannot influence who wins.</p>
+        </div>
+        <div class="fact">
+          <h3>The operator</h3>
+          <p>The platform's own address can deposit but is excluded from ever winning, in code.</p>
+        </div>
+        <div class="fact">
+          <h3>Your principal</h3>
+          <p>No function exists by which any operator can move your deposit. Only interest above tracked principal is ever distributed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Past drawings -->
+    <section class="tp-section">
+      <p class="eyebrow center">The Record</p>
+      <h2 class="display center small">Every drawing, every gift.</h2>
+      <div class="drawings-wrap" id="drawingsBody" style="margin-top: 20px;">
+        <p class="drawings-empty">Loading drawings…</p>
+      </div>
+    </section>
+
+    <!-- Automation proofs -->
+    <section class="tp-section">
+      <p class="eyebrow center">The Automation</p>
+      <h2 class="display center small">Watch it run, yourself.</h2>
+      <p class="tp-lede">
+        Randomness is Chainlink VRF, and the weekly draw is fired by an open-source keeper —
+        both public and verifiable. The contract itself enforces the Thursday 9&nbsp;PM&nbsp;ET schedule
+        on-chain, so no one can change the timing or pick the winner.
+      </p>
+      <div class="links-row" style="justify-content:center; margin-top:18px;">
+        <a class="btn btn-quiet" href="https://github.com/GoldenHomeProject/charity-billionaire-keeper" target="_blank" rel="noopener">Weekly draw trigger (open source) ↗</a>
+        <a class="btn btn-quiet" href="https://basescan.org/address/0x3993bD557E0d4a1E5A8Ec09a005E7Eee3E032f70#events" target="_blank" rel="noopener">Live event log ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-mark">
+      <img src="assets/monogram.svg" alt="" class="monogram" />
+      <span>Charity Billionaire</span>
+    </div>
+    <p class="footer-legal">
+      A no-lose, prize-linked charitable draw. Deposits are refundable in full at any time and are not wagers.
+      Prizes are funded solely by pooled interest. Availability may be restricted by jurisdiction.
+      Live on Base mainnet.
+    </p>
+    <nav class="footer-links">
+      <a href="index.html#how">How it works</a>
+      <a href="transparency.html">Transparency</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="taxes.html">Taxes</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="https://github.com/GoldenHomeProject/charitybillionaire" target="_blank" rel="noopener noreferrer">Source code ↗</a>
+      <a href="https://github.com/GoldenHomeProject/charity-billionaire-keeper" target="_blank" rel="noopener noreferrer">Draw trigger ↗</a>
+    </nav>
+    <p class="footer-fine">© 2026 Charity Billionaire · On-chain · Non-custodial · <a href="https://github.com/GoldenHomeProject" target="_blank" rel="noopener noreferrer">Open source</a></p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

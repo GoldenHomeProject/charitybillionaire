@@ -1,0 +1,21 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Wrangler / Cloudflare
+.wrangler/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+
+# Internal working files (root-level docs and local scripts are not part of the codebase)
+/docs/
+/cre/
+/marketing/
+/*.sh

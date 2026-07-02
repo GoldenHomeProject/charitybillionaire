@@ -1,0 +1,6 @@
+# Integrity pins for vendored dependencies on the signing path.
+# Verify any time with:   shasum -a 256 -c INTEGRITY.txt   (run from web/vendor/)
+# A mismatch means the file was altered — do NOT deploy until investigated.
+#
+# ethers v6.16.0 — matches the published npm dist.
+511792ad9bf59a33fea13498923280fce66c1cd34b2633f6ce5674b889525926  ethers-6.16.0.js

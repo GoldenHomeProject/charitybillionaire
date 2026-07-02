@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="redirect.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charity Billionaire — Give to Charity. Win the Prize. Keep Your Money.</title>
+  <meta name="description" content="A no-lose charity prize draw. Your deposit stays 100% yours — only the interest is used, funding a weekly gift to charity and a cash prize for one depositor. Give without giving anything up." />
+  <link rel="icon" href="assets/monogram.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a class="wordmark" href="#">
+      <img src="assets/monogram.svg" alt="" class="monogram" />
+      <span>Charity&nbsp;Billionaire</span>
+    </a>
+    <nav class="nav">
+      <a href="#how">How it works</a>
+      <a href="#charity">Charity</a>
+      <a href="#assurance">Your principal</a>
+      <a href="transparency.html">Transparency</a>
+    </nav>
+    <button class="btn btn-ghost" id="connectBtn">Connect Wallet</button>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <p class="eyebrow reveal" style="--d:0ms">A No-Lose Charity Prize Draw</p>
+      <h1 class="display reveal" style="--d:80ms">
+        Give to charity. <em>Win the prize.</em> Keep your money.
+      </h1>
+      <p class="lede reveal" style="--d:160ms">
+        Each week the shared pool's interest funds the draw: <strong>90% becomes the cash prize for one
+        winner and 5% is gifted to a vetted charity</strong> — never a cent from your principal. Give to charity
+        while keeping all of your money, and withdraw any time. You cannot lose your deposit.
+      </p>
+
+      <!-- The headline figure: this week's prize -->
+      <div class="prize reveal" style="--d:240ms">
+        <span class="label">This Week's Prize</span>
+        <div class="prize-figure" id="prizeValue" data-stat>$0</div>
+        <div class="countdown" aria-label="Time until next drawing">
+          <span class="countdown-label">Drawing closes in</span>
+          <div class="clock" id="clock">
+            <div class="unit"><span id="cd-d">00</span><i>Days</i></div>
+            <span class="sep">:</span>
+            <div class="unit"><span id="cd-h">00</span><i>Hrs</i></div>
+            <span class="sep">:</span>
+            <div class="unit"><span id="cd-m">00</span><i>Min</i></div>
+            <span class="sep">:</span>
+            <div class="unit"><span id="cd-s">00</span><i>Sec</i></div>
+          </div>
+        </div>
+        <div class="cta-row">
+          <button class="btn btn-gold" id="depositBtn">Make a Deposit</button>
+          <a class="btn btn-quiet" href="#how">How it works</a>
+        </div>
+        <a class="hero-charity" id="heroCharity" href="#charity" hidden>
+          <span class="hero-charity-heart" aria-hidden="true">♥</span>
+          This week gifts to <strong id="heroCharityName">a vetted charity</strong>
+          <span class="hero-charity-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Secondary live figures -->
+    <section class="ledger reveal" style="--d:320ms" aria-label="Live pool figures">
+      <div class="ledger-item">
+        <span class="label">Total Pooled</span>
+        <span class="figure" id="poolValue" data-stat>$0</span>
+      </div>
+      <div class="rule"></div>
+      <div class="ledger-item">
+        <span class="label">Active Depositors</span>
+        <span class="figure" id="walletsValue" data-stat>0</span>
+      </div>
+      <div class="rule"></div>
+      <div class="ledger-item">
+        <span class="label">This Week's Charity</span>
+        <span class="figure figure-sm" id="charityValue">—</span>
+      </div>
+    </section>
+
+    <!-- Your position (revealed after wallet connect) -->
+    <section class="position" id="position" hidden aria-label="Your position">
+      <div class="position-inner">
+        <p class="eyebrow">Your Position</p>
+        <div class="position-grid">
+          <div class="position-item">
+            <span class="label">Your Deposit</span>
+            <span class="figure" id="posDeposit">$0.00</span>
+          </div>
+          <div class="position-item">
+            <span class="label">Your Odds This Week</span>
+            <span class="figure" id="posOdds">—</span>
+          </div>
+          <div class="position-item">
+            <span class="label">Wallet USDC</span>
+            <span class="figure" id="posWallet">$0.00</span>
+          </div>
+        </div>
+        <div class="position-actions">
+          <button class="btn btn-gold" id="depositBtn2" data-open-deposit>Add to Deposit</button>
+          <button class="btn btn-ghost" id="withdrawBtn">Withdraw</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how" id="how">
+      <p class="eyebrow center">The Mechanism</p>
+      <h2 class="display center small">Three movements, one principle.</h2>
+      <div class="steps">
+        <article class="step">
+          <span class="numeral">I</span>
+          <h3>You Deposit</h3>
+          <p>Add any amount to the shared pool. It is recorded as yours and withdrawable at any moment — no lock-ups, no permission required.</p>
+        </article>
+        <article class="step">
+          <span class="numeral">II</span>
+          <h3>The Pool Earns</h3>
+          <p>Pooled deposits earn interest. Only that interest is ever drawn — your principal is never touched, never at stake.</p>
+        </article>
+        <article class="step">
+          <span class="numeral">III</span>
+          <h3>One Wins, All Give</h3>
+          <p>Each week a single depositor receives 90% of the interest. 5% goes to a vetted charity; 5% sustains the platform. Every distribution is on-chain.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Assurance / principal -->
+    <section class="assurance" id="assurance">
+      <div class="assurance-inner">
+        <p class="eyebrow">An Assurance</p>
+        <h2 class="display small">Your principal is yours, by design.</h2>
+        <p class="assurance-copy">
+          This is not a wager. There is no ticket to buy and nothing to lose. Your deposit is held by an
+          open, non-custodial contract that no operator can reach — withdraw the full amount whenever you wish.
+          The prize is funded purely by the pool's interest, which is why a deposit can win without ever being spent.
+        </p>
+        <ul class="assurance-list">
+          <li><span>Withdraw anytime</span>Full principal, on demand.</li>
+          <li><span>Equal odds per dollar</span>Every dollar holds one equal, verifiable chance.</li>
+          <li><span>Provably fair</span>Winners drawn by Chainlink VRF — cryptographically verifiable.</li>
+          <li><span>On-chain transparency</span>Every prize and gift is publicly recorded.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Charity -->
+    <section class="charity" id="charity">
+      <p class="eyebrow center">The Beneficiaries</p>
+      <h2 class="display center small">A different cause, every week.</h2>
+      <p class="charity-copy center">
+        Each drawing benefits a charity selected from a curated roster of established, highly rated
+        nonprofits. The recipient is published on-chain before each draw.
+      </p>
+      <div class="charity-card featured">
+        <span class="label">This Week's Beneficiary</span>
+        <span class="charity-name" id="charityName">To be announced</span>
+        <span class="charity-focus" id="charityFocus" hidden></span>
+        <p class="charity-blurb" id="charityBlurb">
+          A vetted nonprofit is featured here each week and receives 5% of the pool's interest as an on-chain gift.
+        </p>
+        <div class="charity-gift-row">
+          <span class="charity-gift-label">This week's gift</span>
+          <span class="charity-gift" id="charityGift">$0</span>
+        </div>
+        <div class="charity-links">
+          <a class="charity-link" id="charityLink" href="#" target="_blank" rel="noopener" hidden>Visit their site ↗</a>
+        </div>
+        <p class="charity-next">Next week: <strong id="nextCharityName">—</strong></p>
+      </div>
+    </section>
+
+    <!-- Past drawings -->
+    <section class="drawings-section" id="drawings">
+      <p class="eyebrow center">The Record</p>
+      <h2 class="display center small">Every drawing, on the record.</h2>
+      <p class="charity-copy center">
+        Each winner and each charitable gift is a permanent public entry on-chain. Verify any of them yourself.
+      </p>
+      <div class="drawings-wrap" id="homeDrawingsBody">
+        <p class="drawings-empty">Loading drawings…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-mark">
+      <img src="assets/monogram.svg" alt="" class="monogram" />
+      <span>Charity Billionaire</span>
+    </div>
+    <p class="footer-legal">
+      A no-lose, prize-linked charitable draw. Deposits are refundable in full at any time and are not wagers.
+      Prizes are funded solely by pooled interest. Availability may be restricted by jurisdiction.
+    </p>
+    <nav class="footer-links">
+      <a href="#how">How it works</a>
+      <a href="transparency.html">Transparency</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="taxes.html">Taxes</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="https://github.com/GoldenHomeProject/charitybillionaire" target="_blank" rel="noopener noreferrer">Source code ↗</a>
+      <a href="https://github.com/GoldenHomeProject/charity-billionaire-keeper" target="_blank" rel="noopener noreferrer">Draw trigger ↗</a>
+    </nav>
+    <p class="footer-fine">© 2026 Charity Billionaire · On-chain · Non-custodial · <a href="https://github.com/GoldenHomeProject" target="_blank" rel="noopener noreferrer">Open source</a></p>
+  </footer>
+
+  <!-- Deposit / withdraw modal -->
+  <div class="modal-overlay" id="txModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <p class="eyebrow">Charity Billionaire</p>
+      <h3 class="modal-title display small" id="modalTitle">Make a Deposit</h3>
+      <p class="modal-hint" id="modalHint"></p>
+      <label class="modal-field">
+        <span class="label">Amount (whole USDC)</span>
+        <span class="modal-input-row">
+          <input id="modalAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="0" autocomplete="off" />
+        </span>
+        <span class="modal-sub">Whole dollars only — each $1 is one equal chance to win.</span>
+      </label>
+      <button class="btn btn-gold modal-submit" id="modalAction">Deposit USDC</button>
+      <p class="modal-status" id="modalStatus"></p>
+      <p class="modal-fine">Funds must be USDC on the <strong>Base</strong> network. New to Base? Move USDC over via Coinbase or a bridge first. Your principal is always withdrawable.</p>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
