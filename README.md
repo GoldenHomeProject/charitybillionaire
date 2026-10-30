@@ -40,18 +40,16 @@ time. Inspired by on-chain prize-savings designs such as PoolTogether.
 
 ## Deployed contracts
 
-Currently **testnet only (Base Sepolia, chainId 84532)**. Every contract's source is
-verified on the block explorer — read exactly what is running:
+**Live on Base mainnet (chainId 8453).** Every contract's source is verified on Basescan,
+so anyone can read exactly what is running:
 
 | Contract | Address |
 | --- | --- |
-| Vault | `0xE977CBBfcC5DAD30F16AA299cEE910e8eFE6cC24` |
-| VRF adapter | `0x986b70d7Cfde426A1ceE324FceBA39E8eea0CC29` |
-| VRF owner-lock | `0x364cfa16D929d397704449225c3BBeE01DE847F7` |
-| Automation target | `0xEa377A351BA87DD08BD5EB3B3C67A6D1Ec98DA0F` |
-
-Explorer: https://sepolia.basescan.org · Mainnet deployment is gated on a professional
-audit and legal review (see below) and is **not** live.
+| Prize vault | [`0x3993bD557E0d4a1E5A8Ec09a005E7Eee3E032f70`](https://basescan.org/address/0x3993bD557E0d4a1E5A8Ec09a005E7Eee3E032f70#code) |
+| Randomness adapter (Chainlink VRF v2.5) | [`0x604585F750cDCc503ABb65eBcD5b656FBEe6925c`](https://basescan.org/address/0x604585F750cDCc503ABb65eBcD5b656FBEe6925c#code) |
+| VRF owner-lock | [`0xcA5002B3C7c5F92Ddb3c0C4D2fefEdD57F9A3418`](https://basescan.org/address/0xcA5002B3C7c5F92Ddb3c0C4D2fefEdD57F9A3418#code) |
+| Automation target | [`0x5c09c9D0aCF8E00FF1CB54b87b019f780a7cFD48`](https://basescan.org/address/0x5c09c9D0aCF8E00FF1CB54b87b019f780a7cFD48#code) |
+| Charity forwarder | [`0x79f36B9Fba86aC8A020ABBd08B6ee2F201Ab3C77`](https://basescan.org/address/0x79f36B9Fba86aC8A020ABBd08B6ee2F201Ab3C77#code) |
 
 ## Build & test
 
@@ -76,9 +74,9 @@ in `web/app.js`).
 
 ## Security
 
-See [SECURITY.md](SECURITY.md) for responsible disclosure. This code has had internal
-review; a professional third-party audit is planned before any mainnet launch.
-**Treat all current deployments as experimental.**
+See [SECURITY.md](SECURITY.md) for responsible disclosure. The contracts are verified on
+Basescan and have had multiple in-depth security reviews, with every finding from those
+reviews fixed. Smart-contract risk applies.
 
 ## Disclaimer
 
