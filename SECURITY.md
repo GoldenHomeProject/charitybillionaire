@@ -37,7 +37,7 @@ Out of scope:
 
 ## Audits
 
-This code has had internal review. A professional third-party audit is planned
-before any mainnet launch with real funds. Until then, treat all deployments as
-experimental. Verified source for every deployed contract is published on the
-block explorer (see the README) so anyone can review exactly what is running.
+Live on Base mainnet. The contracts are verified on Basescan and have had multiple
+in-depth security reviews, with every finding from those reviews fixed. Verified source
+for every deployed contract is linked in the README, so anyone can review exactly what is
+running. Smart-contract risk applies.
